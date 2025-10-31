@@ -26,8 +26,11 @@ const features = [
 
 const Features = () => {
   return (
-    <section className="py-20 md:py-32 bg-background">
-      <div className="container mx-auto px-4">
+    <section id="features" className="py-20 md:py-32 bg-background relative overflow-hidden">
+      {/* Decorative grid pattern */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+      
+      <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Everything your team needs</h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -38,15 +41,15 @@ const Features = () => {
           {features.map((feature, index) => (
             <Card 
               key={index} 
-              className="group hover:shadow-lg transition-all duration-300 border-border animate-fade-in-up"
+              className="group hover:shadow-lg hover:shadow-primary/20 hover:-translate-y-2 transition-all duration-300 border-border bg-card/50 backdrop-blur-sm animate-fade-in-up"
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              <CardContent className="p-6 text-center">
-                <div className="mb-4 inline-flex items-center justify-center w-16 h-16 rounded-xl bg-gradient-primary text-primary-foreground group-hover:scale-110 transition-transform">
-                  <feature.icon className="h-8 w-8" />
+              <CardContent className="p-8 text-center">
+                <div className="mb-6 inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-primary text-primary-foreground group-hover:scale-110 group-hover:rotate-3 transition-all shadow-soft">
+                  <feature.icon className="h-10 w-10" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                <p className="text-muted-foreground">{feature.description}</p>
+                <h3 className="text-2xl font-bold mb-3">{feature.title}</h3>
+                <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
               </CardContent>
             </Card>
           ))}

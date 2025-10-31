@@ -27,7 +27,7 @@ const testimonials = [
 
 const Testimonials = () => {
   return (
-    <section className="py-20 md:py-32 bg-background">
+    <section id="testimonials" className="py-20 md:py-32 bg-background relative overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Loved by teams worldwide</h2>
@@ -39,10 +39,10 @@ const Testimonials = () => {
           {testimonials.map((testimonial, index) => (
             <Card 
               key={index}
-              className="hover:shadow-lg transition-all duration-300 animate-fade-in-up"
+              className="hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1 transition-all duration-300 animate-fade-in-up bg-card/50 backdrop-blur-sm"
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              <CardContent className="p-6">
+              <CardContent className="p-8">
                 <div className="flex mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
                     <Star key={i} className="h-5 w-5 fill-accent text-accent" />

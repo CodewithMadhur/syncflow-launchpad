@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Check } from "lucide-react";
+import { toast } from "sonner";
 
 const plans = [
   {
@@ -47,8 +48,20 @@ const plans = [
 ];
 
 const Pricing = () => {
+  const handlePlanSelection = (planName: string) => {
+    if (planName === "Enterprise") {
+      toast.success("Contact Sales", {
+        description: "We'll get in touch with you shortly to discuss your needs.",
+      });
+    } else {
+      toast.success(`${planName} Plan Selected!`, {
+        description: "Redirecting to sign up...",
+      });
+    }
+  };
+
   return (
-    <section className="py-20 md:py-32 bg-gradient-hero">
+    <section id="pricing" className="py-20 md:py-32 bg-gradient-hero relative overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Simple, transparent pricing</h2>
@@ -60,8 +73,8 @@ const Pricing = () => {
           {plans.map((plan, index) => (
             <Card 
               key={index}
-              className={`relative hover:shadow-lg transition-all duration-300 animate-fade-in-up ${
-                plan.popular ? "border-primary shadow-lg scale-105" : ""
+              className={`relative hover:shadow-xl hover:-translate-y-2 transition-all duration-300 animate-fade-in-up bg-card/50 backdrop-blur-sm ${
+                plan.popular ? "border-primary shadow-lg scale-105 hover:scale-110" : ""
               }`}
               style={{ animationDelay: `${index * 100}ms` }}
             >
@@ -88,9 +101,10 @@ const Pricing = () => {
                   ))}
                 </ul>
                 <Button 
-                  className="w-full" 
+                  className="w-full hover:scale-105 transition-transform" 
                   variant={plan.popular ? "default" : "outline"}
                   size="lg"
+                  onClick={() => handlePlanSelection(plan.name)}
                 >
                   {plan.price === "Custom" ? "Contact Sales" : "Get Started"}
                 </Button>
