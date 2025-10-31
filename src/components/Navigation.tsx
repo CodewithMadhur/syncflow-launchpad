@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isFeaturesOpen, setIsFeaturesOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,12 +41,51 @@ const Navigation = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            <button
-              onClick={() => scrollToSection("features")}
-              className="text-foreground hover:text-primary transition-colors"
-            >
-              Features
-            </button>
+            <div className="relative group">
+              <button
+                className="text-foreground hover:text-primary transition-colors flex items-center gap-1"
+                onMouseEnter={() => setIsFeaturesOpen(true)}
+                onMouseLeave={() => setIsFeaturesOpen(false)}
+              >
+                Features
+                <ChevronDown className="w-4 h-4" />
+              </button>
+              {isFeaturesOpen && (
+                <div 
+                  className="absolute top-full left-0 mt-2 w-64 bg-background/95 backdrop-blur-md border border-border rounded-lg shadow-lg p-2 z-50"
+                  onMouseEnter={() => setIsFeaturesOpen(true)}
+                  onMouseLeave={() => setIsFeaturesOpen(false)}
+                >
+                  <Link to="/chat" className="block px-4 py-2 hover:bg-secondary rounded-lg transition-colors">
+                    Real-Time Chat
+                  </Link>
+                  <Link to="/tasks" className="block px-4 py-2 hover:bg-secondary rounded-lg transition-colors">
+                    Task Management
+                  </Link>
+                  <Link to="/video" className="block px-4 py-2 hover:bg-secondary rounded-lg transition-colors">
+                    Video Meetings
+                  </Link>
+                  <Link to="/files" className="block px-4 py-2 hover:bg-secondary rounded-lg transition-colors">
+                    File Sharing
+                  </Link>
+                  <Link to="/analytics" className="block px-4 py-2 hover:bg-secondary rounded-lg transition-colors">
+                    Analytics Dashboard
+                  </Link>
+                  <Link to="/integrations" className="block px-4 py-2 hover:bg-secondary rounded-lg transition-colors">
+                    Integrations Hub
+                  </Link>
+                  <button
+                    onClick={() => {
+                      scrollToSection("features");
+                      setIsFeaturesOpen(false);
+                    }}
+                    className="block w-full text-left px-4 py-2 hover:bg-secondary rounded-lg transition-colors border-t border-border mt-2 pt-3"
+                  >
+                    View All Features
+                  </button>
+                </div>
+              )}
+            </div>
             <button
               onClick={() => scrollToSection("how-it-works")}
               className="text-foreground hover:text-primary transition-colors"
@@ -85,12 +126,29 @@ const Navigation = () => {
         {isMobileMenuOpen && (
           <div className="md:hidden py-4 border-t border-border bg-background/95 backdrop-blur-md">
             <div className="flex flex-col gap-4">
-              <button
-                onClick={() => scrollToSection("features")}
-                className="text-left px-4 py-2 hover:bg-secondary rounded-lg transition-colors"
-              >
-                Features
-              </button>
+              <div className="px-4">
+                <p className="text-xs font-semibold text-muted-foreground mb-2">FEATURES</p>
+                <div className="flex flex-col gap-1 pl-2">
+                  <Link to="/chat" className="text-left px-3 py-2 hover:bg-secondary rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+                    Real-Time Chat
+                  </Link>
+                  <Link to="/tasks" className="text-left px-3 py-2 hover:bg-secondary rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+                    Task Management
+                  </Link>
+                  <Link to="/video" className="text-left px-3 py-2 hover:bg-secondary rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+                    Video Meetings
+                  </Link>
+                  <Link to="/files" className="text-left px-3 py-2 hover:bg-secondary rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+                    File Sharing
+                  </Link>
+                  <Link to="/analytics" className="text-left px-3 py-2 hover:bg-secondary rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+                    Analytics Dashboard
+                  </Link>
+                  <Link to="/integrations" className="text-left px-3 py-2 hover:bg-secondary rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+                    Integrations Hub
+                  </Link>
+                </div>
+              </div>
               <button
                 onClick={() => scrollToSection("how-it-works")}
                 className="text-left px-4 py-2 hover:bg-secondary rounded-lg transition-colors"
